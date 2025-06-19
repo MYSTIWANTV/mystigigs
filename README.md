@@ -1,1 +1,1 @@
-# mystigigs.github.io
+# mystigigs
