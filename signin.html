@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign In | Mystiwan E-Business Center</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(120deg, #0beef1 0%, #e0f7fa 100%);
+      margin: 0;
+      color: #222;
+      min-height: 100vh;
+      text-align: center;
+    }
+    .header {
+      background: #fff;
+      padding: 32px 0 18px 0;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      margin-bottom: 0;
+    }
+    .header h1 {
+      color: #011193;
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin: 0;
+      letter-spacing: 1px;
+    }
+    .header h3 {
+      color: #0057b8;
+      margin: 10px 0 0 0;
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+    hr {
+      border: none;
+      border-top: 2px solid #00e6e6;
+      margin: 0 0 18px 0;
+    }
+    .signin-container {
+      max-width: 400px;
+      margin: 40px auto 0 auto;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.09);
+      padding: 32px 28px 24px 28px;
+      text-align: left;
+    }
+    form label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+      color: #0057b8;
+    }
+    form input[type="text"],
+    form input[type="password"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 14px;
+      border-radius: 5px;
+      border: 1px solid #b3e0ff;
+      font-size: 1rem;
+    }
+    form input[type="submit"] {
+      background: linear-gradient(90deg, #28a745 0%, #b3ffec 100%);
+      color: #fff;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 28px;
+      font-size: 1rem;
+      margin-right: 10px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    form input[type="submit"]:hover {
+      background: linear-gradient(90deg, #00e6e6 0%, #28a745 100%);
+      transform: translateY(-2px) scale(1.04);
+    }
+    form input[type="reset"] {
+      background: linear-gradient(90deg, #ffb347 0%, #ffcc80 100%);
+      color: #222;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 28px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    form input[type="reset"]:hover {
+      background: linear-gradient(90deg, #ffcc80 0%, #ffb347 100%);
+      color: #b30000;
+      transform: translateY(-2px) scale(1.04);
+    }
+    .back-link {
+      display: inline-block;
+      margin: 24px 0 0 0;
+      color: #0057b8;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+    .back-link:hover {
+      color: #e60000;
+      text-decoration: underline;
+    }
+    @media (max-width: 600px) {
+      .signin-container {
+        max-width: 98vw;
+        padding: 12px 4vw 18px 4vw;
+      }
+      .header h1 {
+        font-size: 1.3rem;
+      }
+      .header h3 {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Mystiwan E-Bussiness Center</h1>
+    <h3>Sign In</h3>
+    <hr>
+  </div>
+  <div class="signin-container">
+    <form id="signinForm" autocomplete="off">
+      <label for="signinUsername">Username</label>
+      <input type="text" required placeholder="eg.Mystiwan" id="signinUsername">
+      <label for="signinPassword">Password</label>
+      <input type="password" required placeholder="eg.Mysti@123" id="signinPassword">
+      <input type="submit" value="Sign In">
+      <input type="reset" value="Reset">
+    </form>
+    <a href="index.html" class="back-link">Back</a>
+  </div>
+  <script>
+    document.getElementById('signinForm').onsubmit = function(e) {
+      e.preventDefault();
+      alert("Login success!");
+      window.location.href = "signupandorder.html";
+    };
+  </script>
+</body>
+</html>

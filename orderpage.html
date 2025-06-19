@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SignUp & Order Page | Mystiwan E-Business</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(120deg, #0beef1 0%, #e0f7fa 100%);
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      color: #222;
+      min-height: 100vh;
+    }
+    .header {
+      background: #fff;
+      padding: 32px 0 18px 0;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      margin-bottom: 0;
+    }
+    .header h1 {
+      color: #011193;
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin: 0;
+      letter-spacing: 1px;
+    }
+    .header h3 {
+      color: #0057b8;
+      margin: 10px 0 0 0;
+      font-size: 1.1rem;
+      font-weight: 500;
+      padding-left: 50px;
+      text-align: left;
+      display: inline-block;
+    }
+    hr {
+      border: none;
+      border-top: 2px solid #00e6e6;
+      margin: 0 0 18px 0;
+    }
+    form {
+      margin: 30px auto 20px auto;
+      background: #fff;
+      padding: 25px 30px 15px 30px;
+      border-radius: 12px;
+      width: 350px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.09);
+      text-align: left;
+    }
+    label { display: inline-block; width: 110px; color: #0057b8; font-weight: 500;}
+    input[type="text"], input[type="password"], input[type="tel"] {
+      width: 180px;
+      padding: 8px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #b3e0ff;
+      font-size: 1rem;
+    }
+    input[type="submit"] {
+      background: linear-gradient(90deg, #28a745 0%, #b3ffec 100%);
+      color: #fff;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 28px;
+      font-size: 1rem;
+      margin-right: 10px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    input[type="submit"]:hover {
+      background: linear-gradient(90deg, #00e6e6 0%, #28a745 100%);
+      transform: translateY(-2px) scale(1.04);
+    }
+    input[type="reset"] {
+      background: linear-gradient(90deg, #ffb347 0%, #ffcc80 100%);
+      color: #222;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 28px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    input[type="reset"]:hover {
+      background: linear-gradient(90deg, #ffcc80 0%, #ffb347 100%);
+      color: #b30000;
+      transform: translateY(-2px) scale(1.04);
+    }
+    .back-link {
+      display: inline-block;
+      margin: 20px 0;
+      color: #0057b8;
+      text-decoration: underline;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+    .back-link:hover {
+      color: #e60000;
+    }
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0; top: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.35);
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background: #fff;
+      margin: 8% auto;
+      padding: 32px 32px 22px 32px;
+      border-radius: 14px;
+      width: 350px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.09);
+      text-align: left;
+      position: relative;
+      max-width: 95vw;
+    }
+    .close {
+      color: #aaa;
+      position: absolute;
+      right: 18px;
+      top: 10px;
+      font-size: 32px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .close:hover { color: #e60000; }
+    .modal-content h2 {
+      text-align:center;
+      color:#0057b8;
+      margin-bottom:24px;
+      font-weight:600;
+    }
+    .modal-content label {
+      display:inline-block;
+      width:110px;
+      color:#0057b8;
+      font-weight:500;
+    }
+    .modal-content input[type="text"],
+    .modal-content input[type="password"] {
+      width:180px;
+      padding:8px;
+      margin-bottom:14px;
+      border-radius:5px;
+      border:1px solid #b3e0ff;
+      font-size:1rem;
+    }
+    .modal-content input[type="submit"] {
+      background: linear-gradient(90deg, #28a745 0%, #b3ffec 100%);
+      color: #fff;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 28px;
+      font-size: 1rem;
+      margin-right: 10px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .modal-content input[type="submit"]:hover {
+      background: linear-gradient(90deg, #00e6e6 0%, #28a745 100%);
+      transform: translateY(-2px) scale(1.04);
+    }
+    .modal-content input[type="reset"] {
+      background: linear-gradient(90deg, #ffb347 0%, #ffcc80 100%);
+      color: #222;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 28px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .modal-content input[type="reset"]:hover {
+      background: linear-gradient(90deg, #ffcc80 0%, #ffb347 100%);
+      color: #b30000;
+      transform: translateY(-2px) scale(1.04);
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Mystiwan E-Bussiness Center</h1>
+    <h3>SignUp Forms</h3>
+    <hr>
+  </div>
+  <!-- Login prompt for existing users -->
+  <div id="loginPrompt" style="margin: 30px auto 0 auto; max-width: 350px; background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.09); padding: 24px 30px 18px 30px; text-align: center;">
+    <span style="color:#0057b8; font-weight:600; font-size:1.1rem;">Already have an account?</span>
+    <br>
+    <button id="showSignInBtn" style="display:inline-block; margin-top:14px; background: linear-gradient(90deg, #28a745 0%, #b3ffec 100%); color: #fff; font-weight: bold; border: none; border-radius: 6px; padding: 10px 28px; font-size: 1rem; cursor:pointer; transition: background 0.2s, transform 0.2s;">Sign In</button>
+  </div>
+  <form id="signupForm" autocomplete="off">
+    <label for="fname">First name</label>
+    <input type="text" required placeholder="Kofi" id="fname"><br>
+    <label for="lname">Last name</label>
+    <input type="text" required placeholder="Mysti" id="lname"><br>
+    <label for="username">Username</label>
+    <input type="text" required placeholder="eg.Mystiwan" id="username"><br>
+    <label for="password">Password</label>
+    <input type="password" required id="password"  placeholder="eg.Mysti@123"><br>
+    <label for="repeat_password">Repeat password</label>
+    <input type="password" required  placeholder="eg.Mysti@123" id="repeat_password"><br>
+    <label for="email">Email</label>
+    <input type="text" required placeholder="mysti123@gmail.com" id="email"><br>
+    <label for="phone">Phone #</label>
+    <input type="tel" required id="phone"  placeholder="0241234567" maxlength="10"><br>
+    <a href="signupandorder.html">
+    <input type="submit" value="Sign Up">
+    </a>
+    <input type="reset">
+  </form>
+  <a href="up.html" class="back-link">Back</a>
+
+  <!-- Sign In Modal -->
+  <div id="signInModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeSignInModal">&times;</span>
+      <h2>Sign In</h2>
+      <form id="signInForm" autocomplete="off">
+        <label for="loginUsername">Username</label>
+        <input type="text" required placeholder="eg.Mystiwan" id="loginUsername"><br>
+        <label for="loginPassword">Password</label>
+        <input type="password" required placeholder="eg.Mysti@123" id="loginPassword"><br>
+        <input type="submit" value="Sign In">
+        <input type="reset" value="Reset">
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Show modal on button click
+    document.getElementById('showSignInBtn').onclick = function() {
+      document.getElementById('signInModal').style.display = 'flex';
+    };
+    // Close modal on close icon
+    document.getElementById('closeSignInModal').onclick = function() {
+      document.getElementById('signInModal').style.display = 'none';
+    };
+    // Close modal when clicking outside modal content
+    window.onclick = function(event) {
+      var modal = document.getElementById('signInModal');
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    };
+    // Handle sign in form submit
+    document.getElementById('signInForm').onsubmit = function(e) {
+      e.preventDefault();
+      // You can add authentication logic here if needed
+      window.location.href = "signupandorder.html";
+    };
+
+    document.getElementById('signupForm').onsubmit = function(e) {
+      e.preventDefault();
+      // After successful signup, redirect to signupandorder.html
+      window.location.href = "signupandorder.html";
+    };
+  </script>
+</body>
+</html>

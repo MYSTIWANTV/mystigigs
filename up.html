@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Signup / Login | Mystiwan E-Business</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: linear-gradient(120deg, #0beef1 0%, #e0f7fa 100%);
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: #222;
+      min-height: 100vh;
+    }
+    .main-header {
+      background: #fff;
+      text-align: center;
+      font-size: 2.5rem;
+      color: #011193;
+      font-weight: 700;
+      padding: 32px 0 18px 0;
+      letter-spacing: 1px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      margin-bottom: 0;
+    }
+    hr {
+      border: none;
+      border-top: 2px solid #00e6e6;
+      margin: 0 0 18px 0;
+    }
+    .container {
+      max-width: 420px;
+      margin: 30px auto 0 auto;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.09);
+      padding: 32px 28px 24px 28px;
+      text-align: center;
+    }
+    .container h2 {
+      color: #0057b8;
+      font-size: 1.3rem;
+      margin-bottom: 24px;
+      font-weight: 600;
+    }
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+    .btn-group a {
+      text-decoration: none;
+    }
+    .btn {
+      padding: 12px 32px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 7px;
+      background: linear-gradient(90deg, #0057b8 0%, #00e6e6 100%);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn:hover {
+      background: linear-gradient(90deg, #00e6e6 0%, #0057b8 100%);
+      transform: translateY(-2px) scale(1.04);
+      color: #fff;
+    }
+    .signup-form {
+      margin: 0 auto 22px auto;
+      text-align: left;
+      max-width: 320px;
+      background: #f8f9fa;
+      padding: 18px 18px 10px 18px;
+      border-radius: 10px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+    }
+    .signup-form label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+      color: #0057b8;
+    }
+    .signup-form input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 14px;
+      border-radius: 5px;
+      border: 1px solid #b3e0ff;
+      font-size: 1rem; 
+
+    }
+    .back-link {
+      display: inline-block;
+      margin: 18px 0 0 0;
+      color: #0057b8;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+    .back-link:hover {
+      color: #e60000;
+      text-decoration: underline;
+    }
+    .media-section {
+      margin: 36px auto 0 auto;
+      max-width: 500px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      padding: 18px 24px 24px 24px;
+      text-align: center;
+    }
+    .media-section mark {
+      background: #e0ffe0;
+      color: #0057b8;
+      padding: 2px 8px;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+    .media-section video, .media-section audio {
+      margin-top: 10px;
+      border-radius: 8px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+      width: 100%;
+      max-width: 480px;
+    }
+    .media-section .video-label {
+      background-color: #ffecb3;
+      color: #b30000;
+      padding: 2px 8px;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+    @media (max-width: 600px) {
+      .container, .media-section {
+        max-width: 98vw;
+        padding: 12px 4vw 18px 4vw;
+      }
+      .main-header {
+        font-size: 1.3rem;
+        padding: 18px 0 10px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="main-header">
+    MYSTIWAN E-BUSINESS
+  </div>
+  <hr>
+  <div class="container">
+    <h2><i>Signup/In to continue.</i></h2>
+    <div class="btn-group">
+      <a href="signin.html
+      "><button class="btn">Login</button></a>
+      <a href="orderpage.html"><button class="btn" style="background:linear-gradient(90deg,#ffb347 0%,#ffcc80 100%);color:#222;">Sign Up</button></a>
+    </div>
+    <form class="signup-form" autocomplete="off" style="display:none;">
+      <label>User name</label>
+      <input type="text" placeholder="Enter username" disabled>
+      <label>Number</label>
+      <input type="tel" placeholder="Enter phone number" disabled>
+      <label>Password</label>
+      <input type="password" placeholder="Enter password" disabled>
+    </form>
+    <a href="index.html" class="back-link">Back</a>
+  </div>
+  <div class="media-section">
+    <p><mark>Simi Love-Dont-Care</mark></p>
+    <audio controls loop muted autoplay>
+      <source src="Simi-Love-Dont-Care-[TrendyBeatz.com].mp3">
+      Your browser does not support the audio element.
+    </audio>
+    <p><span class="video-label">Father's day gift</span></p>
+    <video src="Mysti Edit.mp4" controls style="max-width:480px;"></video>
+  </div>
+</body>
+</html>

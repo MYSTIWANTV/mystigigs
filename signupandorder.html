@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Page | Mystiwan E-Business</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(120deg, #0beef1 0%, #e0f7fa 100%);
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      color: #222;
+      min-height: 100vh;
+    }
+    .header {
+      background: #fff;
+      padding: 32px 0 18px 0;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      margin-bottom: 0;
+    }
+    .header h1 {
+      color: #011193;
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin: 0;
+      letter-spacing: 1px;
+    }
+    .header h3 {
+      color: #0057b8;
+      margin: 10px 0 0 0;
+      font-size: 1.1rem;
+      font-weight: 500;
+      padding-left: 50px;
+      text-align: left;
+      display: inline-block;
+    }
+    hr {
+      border: none;
+      border-top: 2px solid #00e6e6;
+      margin: 0 0 18px 0;
+    }
+    .network-btn {
+      margin: 10px;
+      padding: 15px 35px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: box-shadow 0.2s, transform 0.2s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }
+    .network-btn.mtn { background: #ffcb05; color: #222; }
+    .network-btn.telecel { background: #e60000; }
+    .network-btn.airteltigo { background: #0057b8; }
+    .network-btn:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.13);
+      transform: translateY(-2px) scale(1.04);
+    }
+    .modal { display: none; position: fixed; z-index: 10; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background: rgba(0,0,0,0.35);}
+    .modal-content { background: #fff; margin: 6% auto; padding: 30px 30px 20px 30px; border-radius: 12px; width: 340px; box-shadow: 0 8px 32px rgba(0,0,0,0.18);}
+    .close { color: #aaa; float: right; font-size: 32px; font-weight: bold; cursor: pointer;}
+    .close:hover { color: #000;}
+    .price-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .price-btn {
+      padding: 12px 0;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    }
+    .mtn .price-btn { background: #ffecb3; color: #222; }
+    .mtn .price-btn:hover { background: #ffe066; }
+    .telecel .price-btn { background: #ffb3b3; color: #b30000; }
+    .telecel .price-btn:hover { background: #ff6666; color: #fff; }
+    .airteltigo .price-btn { background: #b3d1ff; color: #003366; }
+    .airteltigo .price-btn:hover { background: #3399ff; color: #fff; }
+    .cart-container {
+      background: #fff;
+      width: 340px;
+      margin: 30px auto 0 auto;
+      border-radius: 10px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.09);
+      padding: 20px 30px;
+      text-align: left;
+    }
+    #cartList {
+      padding-left: 18px;
+    }
+    #cartList li {
+      margin-bottom: 7px;
+      font-size: 15px;
+    }
+    #cartTotal {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    #submitBtn {
+      margin-top: 15px;
+      padding: 10px 30px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      background: #28a745;
+      color: #fff;
+      cursor: pointer;
+    }
+    .back-link {
+      display: inline-block;
+      margin: 20px 0;
+      color: #0057b8;
+      text-decoration: underline;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+    .back-link:hover {
+      color: #e60000;
+    }
+    #historyLink {
+      display: block;
+      margin-top: 18px;
+      color: #0057b8;
+      text-decoration: underline;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+    #historyLink:hover {
+      color: #e60000;
+    }
+    /* Transaction History Table */
+    #historyModal .modal-content {
+      max-width: 95vw;
+      width: 95vw;
+      max-height: 90vh;
+      overflow: auto;
+    }
+    #historyTable {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px;
+      min-width: 700px;
+    }
+    #historyTable th, #historyTable td {
+      padding: 8px 6px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+    #historyTable th {
+      background: #e0ffe0;
+      color: #222;
+      font-weight: 700;
+    }
+    #historyTable td {
+      background: #f9f9f9;
+      color: #0057b8;
+      font-weight: 600;
+    }
+    @media (max-width: 700px) {
+      .cart-container {
+        width: 98vw;
+        padding: 12px 4vw 18px 4vw;
+      }
+      .header h1 {
+        font-size: 1.3rem;
+      }
+      .header h3 {
+        font-size: 1rem;
+        padding-left: 10px;
+      }
+      #historyTable {
+        font-size: 13px;
+        min-width: 400px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Mystiwan E-Bussiness Center</h1>
+    <h3>Order Page</h3>
+    <hr>
+  </div>
+
+  <!-- Order Section -->
+  <div id="orderSection">
+    <h2 style="margin-top:30px;">Order Data Bundle</h2>
+    <div id="orderButtons">
+      <button class="network-btn mtn" onclick="showMTNPrices()">MTN</button>
+      <button class="network-btn telecel" onclick="showTelecelPrices()">TELECEL</button>
+      <button class="network-btn airteltigo" onclick="showAirteltigoPrices()">AIRTELTIGO</button>
+    </div>
+    <!-- MTN Price List Modal -->
+    <div id="mtnModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeMTNModal()">&times;</span>
+        <h2 class="mtn">MTN PRICE LIST</h2>
+        <div id="mtnPriceList" class="price-list"></div>
+      </div>
+    </div>
+    <!-- TELECEL Price List Modal -->
+    <div id="telecelModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeTelecelModal()">&times;</span>
+        <h2 class="telecel">TELECEL AVAILABLE</h2>
+        <div id="telecelPriceList" class="price-list"></div>
+      </div>
+    </div>
+    <!-- AIRTELTIGO Price List Modal -->
+    <div id="airteltigoModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeAirteltigoModal()">&times;</span>
+        <h2 class="airteltigo">AIRTELTIGO AVAILABLE</h2>
+        <div id="airteltigoPriceList" class="price-list"></div>
+      </div>
+    </div>
+    <!-- Cart Display -->
+    <div class="cart-container">
+      <h3>Cart</h3>
+      <ul id="cartList"></ul>
+      <div id="cartTotal"></div>
+      <button id="submitBtn">Submit Order</button>
+      <button id="clearCartBtn" style="background:#dc3545; color:#fff; margin-left:10px;">Clear Cart</button>
+      <a href="#" id="historyLink">View Transaction History</a>
+    </div>
+  </div>
+
+  <!-- Transaction History Modal -->
+  <div id="historyModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeHistoryModal()">&times;</span>
+      <h2>Transaction History</h2>
+      <div style="overflow-x:auto;">
+        <table id="historyTable">
+          <thead>
+            <tr>
+              <th>Transaction ID</th>
+              <th>Phone Number</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Item</th>
+              <th>Total (GHC)</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="historyTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phone Modal for Order -->
+  <div id="phoneModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closePhoneModal()">&times;</span>
+      <h3>Enter Phone Number for this Order</h3>
+      <input type="tel" id="orderPhoneInput" placeholder="0241234567" maxlength="10" style="width:90%;padding:8px;font-size:16px;margin:12px 0;border-radius:5px;border:1px solid #ccc;">
+      <button id="confirmPhoneBtn" style="padding:8px 20px;background:#28a745;color:#fff;border:none;border-radius:5px;font-size:16px;cursor:pointer;">Add to Cart</button>
+    </div>
+  </div>
+
+  <a href="up.html" class="back-link">Back</a>
+
+  <script>
+    // Price lists
+    const mtnPrices = [
+      "1GB: GHC6", "2GB: GHC12", "3GB: GHC18", "4GB: GHC24", "5GB: GHC28",
+      "6GB: GHC35", "7GB: GHC38", "8GB: GHC42", "9GB: GHC46", "10GB: GHC50",
+      "15GB: GHC74", "20GB: GHC92", "25GB: GHC115", "30GB: GHC135", "40GB: GHC185",
+      "50GB: GHC215", "60GB: GHC242", "70GB: GHC280", "80GB: GHC310", "92GB: GHC355", "100GB: GHC390"
+    ];
+    const telecelPrices = [
+      "5GB: GHC27", "10GB: GHC48", "15GB: GHC67", "20GB: GHC85", "25GB: GHC109",
+      "30GB: GHC125", "35GB: GHC140", "40GB: GHC160", "45GB: GHC180", "50GB: GHC200"
+    ];
+    const airteltigoPrices = [
+      "1GB: GHC5", "2GB: GHC10", "3GB: GHC15", "4GB: GHC20", "5GB: GHC25",
+      "6GB: GHC29", "7GB: GHC33", "8GB: GHC37", "10GB: GHC45", "15GB: GHC65",
+      "20GB: GHC84", "25GB: GHC105", "30GB: GHC120", "40GB: GHC133", "50GB: GHC150",
+      "60GB: GHC152", "90GB: GHC190", "100GB: GHC210"
+    ];
+    let cart = [];
+    let history = [];
+    let pendingOrder = null;
+
+    function generateTransactionId() {
+      return 'TXN' + Math.floor(Math.random() * 900000 + 100000);
+    }
+    function getTransactionStatus() {
+      const statuses = ['Pending', 'Processing', 'Delivered'];
+      return statuses[Math.floor(Math.random() * statuses.length)];
+    }
+
+    function showMTNPrices() {
+      document.getElementById('mtnModal').style.display = 'block';
+      const priceList = document.getElementById('mtnPriceList');
+      priceList.innerHTML = '';
+      mtnPrices.forEach(price => {
+        const btn = document.createElement('button');
+        btn.className = 'price-btn';
+        btn.textContent = price;
+        btn.onclick = () => addToCart(price, 'MTN');
+        priceList.appendChild(btn);
+      });
+      document.querySelector('#mtnModal .modal-content').className = 'modal-content mtn';
+    }
+    function closeMTNModal() { document.getElementById('mtnModal').style.display = 'none'; }
+    function showTelecelPrices() {
+      document.getElementById('telecelModal').style.display = 'block';
+      const priceList = document.getElementById('telecelPriceList');
+      priceList.innerHTML = '';
+      telecelPrices.forEach(price => {
+        const btn = document.createElement('button');
+        btn.className = 'price-btn';
+        btn.textContent = price;
+        btn.onclick = () => addToCart(price, 'TELECEL');
+        priceList.appendChild(btn);
+      });
+      document.querySelector('#telecelModal .modal-content').className = 'modal-content telecel';
+    }
+    function closeTelecelModal() { document.getElementById('telecelModal').style.display = 'none'; }
+    function showAirteltigoPrices() {
+      document.getElementById('airteltigoModal').style.display = 'block';
+      const priceList = document.getElementById('airteltigoPriceList');
+      priceList.innerHTML = '';
+      airteltigoPrices.forEach(price => {
+        const btn = document.createElement('button');
+        btn.className = 'price-btn';
+        btn.textContent = price;
+        btn.onclick = () => addToCart(price, 'AIRTELTIGO');
+        priceList.appendChild(btn);
+      });
+      document.querySelector('#airteltigoModal .modal-content').className = 'modal-content airteltigo';
+    }
+    function closeAirteltigoModal() { document.getElementById('airteltigoModal').style.display = 'none'; }
+
+    function addToCart(item, network) {
+      pendingOrder = { item, network };
+      document.getElementById('orderPhoneInput').value = '';
+      document.getElementById('phoneModal').style.display = 'block';
+    }
+    document.getElementById('confirmPhoneBtn').onclick = function() {
+      const phone = document.getElementById('orderPhoneInput').value.trim();
+      if (!/^\d{10}$/.test(phone)) {
+        alert("Please enter a valid 10-digit phone number.");
+        return;
+      }
+      if (pendingOrder) {
+        cart.push({ item: pendingOrder.item, network: pendingOrder.network, number: phone });
+        updateCart();
+        closePhoneModal();
+        closeMTNModal();
+        closeTelecelModal();
+        closeAirteltigoModal();
+        pendingOrder = null;
+      }
+    };
+    function closePhoneModal() {
+      document.getElementById('phoneModal').style.display = 'none';
+      pendingOrder = null;
+    }
+
+    function updateCart() {
+      const cartList = document.getElementById('cartList');
+      cartList.innerHTML = '';
+      let total = 0;
+      cart.forEach(entry => {
+        let match = entry.item.match(/GHC(\d+)/i);
+        let price = match ? parseInt(match[1]) : 0;
+        total += price;
+        const li = document.createElement('li');
+        li.textContent = `${entry.item} (${entry.network}) - Number: ${entry.number}`;
+        cartList.appendChild(li);
+      });
+      document.getElementById('cartTotal').textContent = "Total: GHC" + total;
+    }
+
+    document.getElementById('submitBtn').onclick = function() {
+      if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+      }
+      const now = new Date();
+      const date = now.toLocaleDateString();
+      const time = now.toLocaleTimeString();
+      const status = getTransactionStatus();
+      cart.forEach(entry => {
+        const transactionId = generateTransactionId();
+        let match = entry.item.match(/GHC(\d+)/i);
+        let price = match ? parseInt(match[1]) : 0;
+        history.push({
+          id: transactionId,
+          phone: entry.number,
+          date,
+          time,
+          item: `${entry.item} (${entry.network})`,
+          total: price,
+          status
+        });
+      });
+      alert("Order submitted!\n" + cart.map(e => `${e.item} (${e.network}) - ${e.number}`).join('\n') +
+        `\nTotal: GHC${cart.reduce((sum, e) => sum + (parseInt(e.item.match(/GHC(\d+)/i)?.[1] || 0)), 0)}`);
+      cart = [];
+      updateCart();
+    };
+
+    document.getElementById('clearCartBtn').onclick = function() {
+      cart = [];
+      updateCart();
+    };
+
+    document.getElementById('historyLink').onclick = function(e) {
+      e.preventDefault();
+      showHistory();
+    };
+
+    function showHistory() {
+      document.getElementById('historyModal').style.display = 'block';
+      const tbody = document.getElementById('historyTableBody');
+      tbody.innerHTML = '';
+      if (history.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:12px;">No transactions yet.</td></tr>`;
+        return;
+      }
+      history.slice().reverse().forEach(order => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${order.id}</td>
+          <td>${order.phone}</td>
+          <td>${order.date}</td>
+          <td>${order.time}</td>
+          <td>${order.item}</td>
+          <td>${order.total}</td>
+          <td style="font-weight:bold; color:${order.status==='Delivered'?'green':order.status==='Processing'?'#e6b800':'#d9534f'};">
+            ${order.status}
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+    function closeHistoryModal() {
+      document.getElementById('historyModal').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
