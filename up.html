@@ -181,5 +181,34 @@
     <p><span class="video-label">Father's day gift</span></p>
     <video src="father's day --.mp4" controls style="max-width:480px;"></video>
   </div>
+
+  <script>
+    // Install supabase-js first: npm install @supabase/supabase-js
+
+import { createClient } from '@supabase/supabase-js'
+
+// Replace with your Supabase project URL and anon key
+const supabaseUrl = 'https://yuwqxaojvfzwsbhyzvrd.supabase.co'
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl1d3F4YW9qdmZ6d3NiaHl6dnJkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA0MTQ0MzUsImV4cCI6MjA2NTk5MDQzNX0.bzXAZ4QYBdNPFy0A5m5OLny6y9ZZLbSCHu1AvhBl4d8'
+const supabase = createClient(supabaseUrl, supabaseKey)
+
+// Function to sign in a user
+async function signIn(email, password) {
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  })
+
+  if (error) {
+    console.error('Authentication error:', error.message)
+    return null
+  }
+  console.log('User signed in:', data.user)
+  return data.user
+}
+
+// Example usage:
+signIn('user@email.com', 'userpassword')
+  </script>
 </body>
 </html>
